@@ -7,10 +7,6 @@ const hoursAgo = (hours)=>{
   return then
 }
 
-const rainylat=39
-const rainylon=-75
-const rainytime = 1622249755
-
 const getWeather = async (timestamp, lat, lon)=>{
   return await fetch(`https://api.openweathermap.org/data/2.5/onecall/timemachine?lat=${lat}&lon=${lon}&dt=${Math.round(timestamp.getTime() / 1000)}&appid=${apikey}`)
     .then(res=>res.json())
@@ -30,10 +26,11 @@ const checkForRain = async (timestamp, lat, lon)=>{
 }
 
 const checkRainAndDisplay = async (geolocation)=>{
+  const rained_el = document.getElementById("rained")
   if(await checkForRain(hoursAgo(12), geolocation.coords.latitude, geolocation.coords.longitude)){
-    document.body.innerText = 'YES'
+    document.getElementById("rained").innerText = 'YES'
   } else {
-    document.body.innerText = 'NO'
+    document.getElementById("rained").innerText = 'NO'
   }
 }
 
